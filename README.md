@@ -79,11 +79,13 @@ Les fichiers importés sont conservés dans `data/imports/`. Les préférences s
 
 The source code is on the main branch, at the repository root and inside static/:
 
+```bash
 File	               Purpose
 server.py	           Python server and DICOM processing
 static/app.js	       Preview, global zoom and separate viewer window
 static/index.html	   Web interface
 static/style.css	   Visual design
+```
 
 ## Tests
 
