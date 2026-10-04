@@ -75,6 +75,16 @@ Visionneuse de recherche sans validation diagnostique. Les mesures anatomiques, 
 
 Les fichiers importés sont conservés dans `data/imports/`. Les préférences sont enregistrées dans le navigateur. Aucun service externe, CDN ni télémétrie ne reçoit les images. L’application n’effectue pas d’anonymisation ; les DICOM locaux restent inchangés.
 
+## Code source
+
+The source code is on the main branch, at the repository root and inside static/:
+
+File	               Purpose
+server.py	           Python server and DICOM processing
+static/app.js	       Preview, global zoom and separate viewer window
+static/index.html	   Web interface
+static/style.css	   Visual design
+
 ## Tests
 
 Avec l’interpréteur de l’environnement :
