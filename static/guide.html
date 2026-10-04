@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lumina — Guide utilisateur</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/guide.css"></head>
+<body><header><a class="brand" href="/"><img src="/favicon.svg" alt="">Lumina<span>LE GUIDE</span></a>
+<div><a class="back" href="/">Retour à la bibliothèque</a><a class="download" href="/guide.md" download="GUIDE_UTILISATEUR.md">Télécharger le guide</a></div></header>
+<div class="guide-layout"><nav aria-label="Sommaire"><span class="nav-title">DANS CE GUIDE</span><a href="#1-premiere-utilisation-en-cinq-minutes">1. Première utilisation en cinq minutes</a>
+<a href="#2-se-reperer-dans-linterface">2. Se repérer dans l’interface</a>
+<a href="#3-importer-ses-images">3. Importer ses images</a>
+<a href="#4-comprendre-ce-quest-une-coupe-ct">4. Comprendre ce qu’est une coupe CT</a>
+<a href="#5-comprendre-les-niveaux-de-gris-et-les-hu">5. Comprendre les niveaux de gris et les HU</a>
+<a href="#6-choisir-une-fenetre-de-contraste">6. Choisir une fenêtre de contraste</a>
+<a href="#7-reconnaitre-les-grands-reperes-thoraciques">7. Reconnaître les grands repères thoraciques</a>
+<a href="#8-comprendre-la-resolution-et-les-distances">8. Comprendre la résolution et les distances</a>
+<a href="#9-utiliser-les-deux-zooms-et-la-nouvelle-fenetre">9. Utiliser les deux zooms et la nouvelle fenêtre</a>
+<a href="#10-raccourcis-favoris-et-export">10. Raccourcis, favoris et export</a>
+<a href="#11-messages-et-difficultes-frequentes">11. Messages et difficultés fréquentes</a>
+<a href="#12-parcours-dapprentissage-conseille">12. Parcours d’apprentissage conseillé</a>
+<a href="#sources-et-provenance">Sources et provenance</a></nav>
+<main><article><h1 id="lumina-guide-utilisateur">Lumina — Guide utilisateur</h1>
+<p>Comprendre les images CT et explorer une série DICOM, étape par étape.</p>
+<p><strong>Version du guide : 4 octobre 2026.</strong> Ce guide accompagne la version actuelle de Lumina : images CT monochromes, avec une image par fichier DICOM. Il explique la navigation et les principes de lecture visuelle. L’interprétation clinique d’un examen relève d’un radiologue ; Lumina est une visionneuse de recherche sans validation diagnostique.</p>
+<h2 id="1-premiere-utilisation-en-cinq-minutes">1. Première utilisation en cinq minutes</h2>
+<ol>
+<li>Ouvrez <a href="http://127.0.0.1:8765/">Lumina</a> dans votre navigateur. Si la page ne répond pas, lancez <code>start.ps1</code> dans le dossier de l’application et laissez le terminal ouvert.</li>
+<li>Sélectionnez une série dans <strong>Mes séries</strong>. Un exemple synthétique est chargé si vous avez exécuté <code>python tools/generate_demo.py</code>. Sinon, importez vos fichiers locaux.</li>
+<li>Commencez par <strong>Vue d’ensemble</strong> pour parcourir jusqu’à 24 coupes réparties sur l’acquisition. Choisissez <strong>Toutes les coupes</strong> pour accéder à chaque image.</li>
+<li>Cliquez sur une vignette : les détails de la coupe apparaissent dans <strong>Image sélectionnée</strong>, à droite sur grand écran.</li>
+<li>Cliquez sur <strong>Agrandir l’aperçu</strong> pour examiner la coupe. Parcourez la série avec les flèches gauche/droite ou le curseur en bas de la visionneuse.</li>
+</ol>
+<p>Pour changer d’acquisition, revenez à la bibliothèque et choisissez une autre série. Un numéro de coupe désigne sa place dans la série affichée ; il ne constitue pas à lui seul une référence anatomique entre deux examens.</p>
+<h2 id="2-se-reperer-dans-linterface">2. Se repérer dans l’interface</h2>
+<p><img src="/guide-assets/lumina-galerie.jpg" alt="Bibliothèque Lumina : séries à gauche, galerie au centre et détails de l’image à droite." /></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Zone ou commande</th>
+  <th>À quoi elle sert</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Mes séries</strong></td>
+  <td>Choisir une acquisition parmi les fichiers disponibles.</td>
+</tr>
+<tr>
+  <td><strong>Résumé de série</strong></td>
+  <td>Lire le nombre de coupes, la matrice de pixels et l’intervalle mesuré entre les coupes.</td>
+</tr>
+<tr>
+  <td><strong>Vue d’ensemble</strong></td>
+  <td>Voir un échantillonnage réparti sur la série. Les numéros sautent volontairement des coupes.</td>
+</tr>
+<tr>
+  <td><strong>Toutes les coupes</strong></td>
+  <td>Afficher une vignette pour chaque coupe. Les images se chargent progressivement au défilement.</td>
+</tr>
+<tr>
+  <td><strong>Rechercher une coupe</strong></td>
+  <td>Filtrer par numéro. Par exemple, « 25 » retrouve la coupe 025 ; une recherche partielle peut donner plusieurs résultats.</td>
+</tr>
+<tr>
+  <td><strong>Poumon / Tissus mous / Os</strong></td>
+  <td>Changer le contraste de tous les aperçus et de l’image sélectionnée.</td>
+</tr>
+<tr>
+  <td><strong>Aperçus</strong></td>
+  <td>Agrandir ou réduire toutes les cartes de la galerie.</td>
+</tr>
+<tr>
+  <td><strong>Image sélectionnée</strong></td>
+  <td>Voir la coupe, sa position, son plan et ses paramètres d’affichage.</td>
+</tr>
+<tr>
+  <td><strong>Cœur / Favoris</strong></td>
+  <td>Marquer des coupes puis retrouver les favoris de la série sélectionnée.</td>
+</tr>
+<tr>
+  <td><strong>Icône de fenêtre externe</strong></td>
+  <td>Ouvrir une visionneuse indépendante pour la coupe choisie.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Les favoris et la taille des aperçus sont mémorisés dans ce navigateur. Un autre navigateur dispose de ses propres préférences. Les fichiers de la série ne sont pas modifiés par ces opérations.</p>
+<h2 id="3-importer-ses-images">3. Importer ses images</h2>
+<p>Cliquez sur <strong>Importer des DICOM</strong> ou <strong>Ajouter une série</strong>, puis sélectionnez plusieurs fichiers de l’acquisition. Vous pouvez également déposer les fichiers sur la page.</p>
+<p>Lumina prend en charge les <strong>CT monochromes à une image par fichier</strong>. Les images multiframe, les IRM, les radiographies et les fichiers JPEG ordinaires ne font pas partie du périmètre de cette version. Un DICOM est un format qui rassemble les pixels et des informations d’acquisition ; il ne s’agit pas simplement d’une photographie.</p>
+<p>La sélection est limitée à <strong>2 000 fichiers et 250 Mo de fichiers par lot</strong>. L’enveloppe de la requête d’import dispose d’une limite de 256 Mo. Si plusieurs acquisitions compatibles sont sélectionnées, Lumina les regroupe en séries selon leur identifiant et leur géométrie. Les fichiers incompatibles sont écartés et un message indique leur nombre.</p>
+<p>Après l’import, la première série ajoutée est sélectionnée. Les fichiers acceptés restent sur cet ordinateur dans <code>data/imports/</code> et sont retrouvés au redémarrage. Les DICOM originaux peuvent contenir des informations personnelles, même si l’interface ne montre pas le nom du patient : <strong>l’import ne réalise pas d’anonymisation</strong>.</p>
+<h2 id="4-comprendre-ce-quest-une-coupe-ct">4. Comprendre ce qu’est une coupe CT</h2>
+<p>Le CT, aussi appelé scanner ou tomodensitométrie, utilise des rayons X et une reconstruction informatique pour produire des images en coupe de l’intérieur du corps. Une série contient des coupes situées à différents niveaux. Leur succession permet d’explorer un volume. <a href="https://www.radiologyinfo.org/en/ctScan">Présentation du scanner par RadiologyInfo</a>.</p>
+<p>Imaginez un pain découpé en tranches : une coupe correspond à un niveau, et la série à l’ensemble des tranches. L’image CT représente cependant une épaisseur de reconstruction ; elle n’est pas une tranche matérielle infiniment fine.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Plan</th>
+  <th>Image mentale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Axial</strong></td>
+  <td>Coupe transversale, séparant conceptuellement le haut et le bas du corps.</td>
+</tr>
+<tr>
+  <td><strong>Coronal</strong></td>
+  <td>Coupe frontale, séparant l’avant et l’arrière.</td>
+</tr>
+<tr>
+  <td><strong>Sagittal</strong></td>
+  <td>Coupe de profil, séparant la droite et la gauche.</td>
+</tr>
+<tr>
+  <td><strong>Oblique</strong></td>
+  <td>Plan incliné par rapport à ces trois directions principales.</td>
+</tr>
+</tbody>
+</table></div>
+<p>La position et l’orientation enregistrées dans le DICOM définissent le plan de l’image dans le repère du patient. <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html">Standard DICOM — géométrie de l’image</a>.</p>
+<p>Lumina affiche le <strong>plan natif de l’acquisition</strong>. Le libellé « axiale » décrit les images chargées ; ce n’est pas un bouton pour reconstruire automatiquement les plans coronal et sagittal.</p>
+<h2 id="5-comprendre-les-niveaux-de-gris-et-les-hu">5. Comprendre les niveaux de gris et les HU</h2>
+<p>Dans une image CT calibrée, l’intensité peut être exprimée en <strong>unités Hounsfield</strong>, ou <strong>HU</strong>. Cette échelle décrit l’atténuation des rayons X relativement à l’eau. L’eau correspond à 0 HU et l’air à environ −1000 HU. Les valeurs enregistrées doivent être transformées selon les paramètres de calibration du DICOM avant l’affichage. <a href="https://www.ncbi.nlm.nih.gov/books/NBK546157/table/ch8.tab1/">Échelle HU — Medical Imaging Systems</a>, <a href="https://dicom.nema.org/medical/dicom/2026c/output/chtml/part03/sect_C.8.2.html">Standard DICOM — calibration CT</a>.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Matériau ou tissu</th>
+  <th>Repère HU approximatif</th>
+  <th>Aspect avec un fenêtrage approprié, sans inversion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Air</td>
+  <td>Environ −1000</td>
+  <td>Très sombre.</td>
+</tr>
+<tr>
+  <td>Poumon aéré</td>
+  <td>Valeurs négatives ; mélange d’air et de tissus</td>
+  <td>Généralement sombre, avec des structures internes plus claires.</td>
+</tr>
+<tr>
+  <td>Graisse</td>
+  <td>Environ −100 à −60</td>
+  <td>Plus sombre que beaucoup de tissus mous.</td>
+</tr>
+<tr>
+  <td>Eau</td>
+  <td>0</td>
+  <td>Sa luminosité dépend de la fenêtre choisie.</td>
+</tr>
+<tr>
+  <td>Muscle et autres tissus mous</td>
+  <td>Souvent quelques dizaines de HU</td>
+  <td>Plusieurs niveaux de gris.</td>
+</tr>
+<tr>
+  <td>Os</td>
+  <td>Plusieurs centaines à plusieurs milliers de HU</td>
+  <td>Généralement clair.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ces repères sont des ordres de grandeur pédagogiques, pas des seuils de diagnostic. Les valeurs et l’aspect dépendent notamment de l’acquisition, de la reconstruction et de la composition du voxel. Les plages ne permettent pas d’identifier à elles seules une structure ou une maladie. <a href="https://www.ncbi.nlm.nih.gov/books/NBK546157/table/ch8.tab1/">Table de référence HU</a>.</p>
+<p><strong>Une zone blanche n’est pas, à elle seule, une anomalie.</strong> L’os peut être blanc, et certains tissus deviennent blancs lorsqu’une fenêtre les sature. De même, une région noire peut correspondre à de l’air ou au fond de l’image. Le contraste et le contexte anatomique sont indispensables.</p>
+<p>L’application ne propose pas de mesure HU au clic ou de région d’intérêt. Les valeurs <strong>Centre</strong> et <strong>Largeur</strong> sont des paramètres d’affichage, pas des mesures d’un organe.</p>
+<h2 id="6-choisir-une-fenetre-de-contraste">6. Choisir une fenêtre de contraste</h2>
+<p>Une fenêtre sélectionne la plage d’intensités répartie entre le noir et le blanc. Les intensités plus basses ou plus hautes que cette plage sont saturées aux extrémités. Le réglage change l’affichage, sans changer les pixels DICOM originaux. <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.11.2.html">Standard DICOM — fenêtrage</a>.</p>
+<p><img src="/guide-assets/fenetres-ct.png" alt="Même coupe CT affichée en fenêtres poumon, tissus mous et os." /></p>
+<p><em>Comparaison produite à partir de la coupe 025 du fantôme synthétique inclus sous forme de générateur. Cette illustration ne représente aucune personne et ne constitue pas une anatomie de référence. Les trois panneaux représentent les mêmes pixels avec des contrastes différents.</em></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Fenêtre dans Lumina</th>
+  <th style="text-align:right">Centre</th>
+  <th style="text-align:right">Largeur</th>
+  <th>Ce qu’elle aide à distinguer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Poumon</strong></td>
+  <td style="text-align:right">−600 HU</td>
+  <td style="text-align:right">1500 HU</td>
+  <td>Les variations dans les régions pulmonaires aérées. Les tissus plus denses peuvent paraître uniformément blancs.</td>
+</tr>
+<tr>
+  <td><strong>Tissus mous</strong></td>
+  <td style="text-align:right">40 HU</td>
+  <td style="text-align:right">400 HU</td>
+  <td>Des différences plus fines autour des intensités des tissus mous. Les régions aérées deviennent très sombres.</td>
+</tr>
+<tr>
+  <td><strong>Os</strong></td>
+  <td style="text-align:right">400 HU</td>
+  <td style="text-align:right">1800 HU</td>
+  <td>Une plage étendue de valeurs élevées ; certains détails osseux sont moins saturés.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Il s’agit des préréglages de cette application, pas de valeurs universelles pour tous les scanners.</p>
+<p>Dans la visionneuse, <strong>Centre</strong> déplace la plage étudiée. <strong>Largeur</strong> contrôle son étendue : une petite largeur accentue les différences dans une plage étroite ; une grande largeur affiche une plage plus large avec moins de contraste local.</p>
+<p>Pour se représenter le réglage « Tissus mous », centre 40 et largeur 400 correspondent approximativement à une plage de −160 à +240 HU. La convention DICOM LINEAR utilisée comporte un ajustement d’un demi-HU aux limites ; cette approximation sert à comprendre le réglage. <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.11.2.html">Définition DICOM de la fenêtre</a>.</p>
+<p><strong>Exercice :</strong> ouvrez une coupe thoracique, gardez le même numéro, puis passez de Poumon à Tissus mous et à Os. Observez les zones qui deviennent saturées. Revenez à Poumon pour retrouver le contraste initial. Le bouton d’inversion échange les niveaux clairs et sombres ; il ne change pas l’anatomie.</p>
+<p>Le <strong>contraste d’affichage</strong> doit être distingué du <strong>produit de contraste</strong> éventuellement administré pendant l’examen. Ce produit peut modifier l’apparence de certaines structures dans les données acquises ; changer de fenêtre ne peut pas simuler une injection. <a href="https://www.radiologyinfo.org/en/info/safety-contrast">RadiologyInfo — produits de contraste</a>.</p>
+<h2 id="7-reconnaitre-les-grands-reperes-thoraciques">7. Reconnaître les grands repères thoraciques</h2>
+<p><img src="/guide-assets/lumina-visionneuse.jpg" alt="Fantôme synthétique dans la visionneuse avec les repères A, P, R et L." /></p>
+<p>Sur une coupe du thorax, les deux régions pulmonaires se situent de part et d’autre d’une région centrale, le médiastin, où se trouvent notamment le cœur et de gros vaisseaux. Les côtes bordent la cage thoracique ; les vertèbres se trouvent en arrière. Les vaisseaux et les parois des voies aériennes peuvent former des lignes ou des points plus clairs dans les régions pulmonaires, selon leur direction par rapport au plan de coupe. Un scanner thoracique montre les poumons, les structures centrales et les os du thorax. <a href="https://www.radiologyinfo.org/en/info/chestct">RadiologyInfo — scanner thoracique</a>.</p>
+<p>Ces repères constituent une introduction générale. La capture montre un fantôme synthétique pour illustrer la navigation ; elle ne représente pas un examen réel. Une structure doit être suivie sur plusieurs coupes avant de comprendre sa forme et sa continuité.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Lettre affichée</th>
+  <th>Direction du patient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>R</strong></td>
+  <td>Right : droite.</td>
+</tr>
+<tr>
+  <td><strong>L</strong></td>
+  <td>Left : gauche.</td>
+</tr>
+<tr>
+  <td><strong>A</strong></td>
+  <td>Anterior : avant.</td>
+</tr>
+<tr>
+  <td><strong>P</strong></td>
+  <td>Posterior : arrière.</td>
+</tr>
+<tr>
+  <td><strong>S</strong></td>
+  <td>Superior : vers la tête.</td>
+</tr>
+<tr>
+  <td><strong>I</strong></td>
+  <td>Inferior : vers les pieds.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sur le schéma de démonstration, <strong>R</strong> apparaît à gauche de l’écran : ce bord correspond à la droite du patient. Repérez-vous avec les lettres issues du DICOM plutôt qu’en assimilant systématiquement la gauche de l’écran à la gauche du patient. Sur un plan oblique, plusieurs lettres peuvent se combiner. Si la géométrie manque, Lumina ne certifie pas l’orientation et affiche un avertissement. <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html">Repère patient DICOM</a>.</p>
+<h2 id="8-comprendre-la-resolution-et-les-distances">8. Comprendre la résolution et les distances</h2>
+<p>Un <strong>pixel</strong> est un élément de l’image affichée. Un <strong>voxel</strong> est un élément du volume : il possède une étendue dans trois dimensions. Agrandir l’image rend ses pixels plus visibles ; cela n’ajoute pas de détails à l’acquisition.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Information affichée</th>
+  <th>Signification dans Lumina</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Résolution : 256 × 256 px</strong></td>
+  <td>Nombre de colonnes et de lignes de l’image. Ce n’est pas une dimension en millimètres.</td>
+</tr>
+<tr>
+  <td><strong>Pixel : 1 × 1 mm</strong></td>
+  <td>Espacement des centres de pixels dans le plan, dans l’ordre ligne puis colonne.</td>
+</tr>
+<tr>
+  <td><strong>Intervalle : 2 mm</strong></td>
+  <td>Espacement médian mesuré entre les positions de coupe, lorsque la géométrie permet de le calculer.</td>
+</tr>
+<tr>
+  <td><strong>Position : 48 mm</strong>, par exemple</td>
+  <td>Projection de la position de la coupe sur la normale du plan d’acquisition. Ce n’est ni une taille d’organe ni nécessairement la coordonnée Z du patient.</td>
+</tr>
+</tbody>
+</table></div>
+<p>L’intervalle entre les coupes et leur <strong>épaisseur de reconstruction</strong> sont deux notions distinctes. Lumina affiche l’intervalle mesuré, et non une mesure indépendante de l’épaisseur. Les distances enregistrées sont définies par les attributs de géométrie DICOM. <a href="https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html">Standard DICOM — espacement et épaisseur</a>.</p>
+<p>Sur la démonstration synthétique, 256 pixels espacés de 1 mm correspondent à un champ de l’ordre de 256 mm. C’est une estimation de grille, pas une mesure anatomique. Lumina n’offre pas de règle de mesure dans cette version.</p>
+<h2 id="9-utiliser-les-deux-zooms-et-la-nouvelle-fenetre">9. Utiliser les deux zooms et la nouvelle fenêtre</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Réglage</th>
+  <th>Effet</th>
+  <th>Ce qui est conservé</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Zoom Aperçus, de 70 % à 160 %</strong></td>
+  <td>Redimensionne toutes les cartes de la galerie et adapte le nombre de colonnes.</td>
+  <td>Numéros de coupe, contraste et pixels originaux.</td>
+</tr>
+<tr>
+  <td><strong>Zoom dans la visionneuse, de 50 % à 400 %</strong></td>
+  <td>Agrandit l’image par rapport à son ajustement initial à la fenêtre. Après agrandissement, glisser l’image permet de la déplacer.</td>
+  <td>Intensités DICOM et coupe choisie.</td>
+</tr>
+<tr>
+  <td><strong>Fenêtre de contraste</strong></td>
+  <td>Change la correspondance entre intensités et niveaux de gris.</td>
+  <td>Géométrie et données originales.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dans la visionneuse, <strong>100 %</strong> correspond à l’ajustement de référence de l’image dans la fenêtre disponible. Ce n’est pas nécessairement un pixel écran pour un pixel DICOM. Le bouton d’ajustement revient à 100 % et recentre l’image.</p>
+<p>Pour détacher l’image, cliquez sur <strong>Nouvelle fenêtre</strong> dans les détails ou sur l’icône correspondante dans la visionneuse. Les réglages de contraste et d’inversion courants sont transmis ; la nouvelle visionneuse commence avec son propre zoom d’ajustement. Ensuite, les deux vues sont indépendantes : changer une coupe ou son contraste dans une fenêtre ne synchronise pas l’autre.</p>
+<p>Le navigateur peut ouvrir un onglet plutôt qu’une fenêtre ou bloquer une popup. Le navigateur intégré de Codex n’a pas ouvert les popups lors de la vérification. Pour cette fonction, ouvrez Lumina dans Chrome ou Edge et autorisez les fenêtres contextuelles pour l’adresse locale si nécessaire.</p>
+<h2 id="10-raccourcis-favoris-et-export">10. Raccourcis, favoris et export</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Action</th>
+  <th>Commande</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Sélectionner une coupe</td>
+  <td>Clic sur la vignette.</td>
+</tr>
+<tr>
+  <td>Agrandir l’aperçu</td>
+  <td>Double-clic sur une vignette, bouton dédié ou <strong>Espace</strong> quand la page ou une vignette a le focus.</td>
+</tr>
+<tr>
+  <td>Coupe précédente / suivante</td>
+  <td>Boutons de parcours ou <strong>← / →</strong> dans la visionneuse.</td>
+</tr>
+<tr>
+  <td>Zoomer dans la visionneuse</td>
+  <td><strong>+ / −</strong> ou boutons dédiés.</td>
+</tr>
+<tr>
+  <td>Choisir une coupe dans la série</td>
+  <td>Curseur de parcours en bas de la visionneuse.</td>
+</tr>
+<tr>
+  <td>Recentrer et ajuster</td>
+  <td>Bouton d’ajustement à côté du pourcentage de zoom.</td>
+</tr>
+<tr>
+  <td>Fermer l’aperçu</td>
+  <td><strong>Échap</strong> ou bouton de fermeture.</td>
+</tr>
+<tr>
+  <td>Marquer / retirer un favori</td>
+  <td>Cœur sur la vignette ou dans les détails.</td>
+</tr>
+<tr>
+  <td>Exporter</td>
+  <td>Icône de téléchargement dans la visionneuse.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Quand le curseur est dans un champ de saisie, les touches servent à ce champ. Les favoris sont filtrés pour la série sélectionnée : si une autre série semble vide, revenez à celle où vous avez marqué les images.</p>
+<p>L’export produit un <strong>PNG de la coupe entière</strong>, avec le fenêtrage et l’inversion affichés. Le zoom et le déplacement de consultation ne recadrent pas le fichier. Les textes de la visionneuse ne sont pas incorporés au PNG. Ce fichier est une représentation en niveaux de gris ; il ne conserve pas les valeurs HU ni les métadonnées du DICOM. Pour une analyse quantitative, conservez les fichiers DICOM originaux.</p>
+<h2 id="11-messages-et-difficultes-frequentes">11. Messages et difficultés fréquentes</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+  <th>Situation</th>
+  <th>Explication et action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>La page ne s’ouvre pas</strong></td>
+  <td>Démarrez l’application avec <code>start.ps1</code> et ouvrez l’adresse indiquée par le serveur. Si le port a été changé, utilisez cette nouvelle adresse.</td>
+</tr>
+<tr>
+  <td><strong>Bibliothèque vide</strong></td>
+  <td>Aucun dossier de démonstration disponible ou aucune série importée. Ajoutez des DICOM CT compatibles.</td>
+</tr>
+<tr>
+  <td><strong>Aucune coupe trouvée</strong></td>
+  <td>Effacez la recherche ou vérifiez le numéro.</td>
+</tr>
+<tr>
+  <td><strong>Aucun favori</strong></td>
+  <td>Choisissez la bonne série ou marquez une coupe avec le cœur.</td>
+</tr>
+<tr>
+  <td><strong>Image illisible</strong></td>
+  <td>Le fichier peut être incomplet ou utiliser une compression dont le décodeur n’est pas installé. Essayez un DICOM connu comme lisible et consultez la personne qui gère l’environnement Python.</td>
+</tr>
+<tr>
+  <td><strong>Import trop volumineux</strong></td>
+  <td>Réduisez le lot à 250 Mo et 2 000 fichiers maximum. Pour une acquisition plus volumineuse, utilisez le lancement avec <code>-DataDir</code> vers son dossier complet ; cela évite de fragmenter une série entre plusieurs lots.</td>
+</tr>
+<tr>
+  <td><strong>Géométrie incomplète</strong></td>
+  <td>Le tri utilise un repli sur le numéro d’instance. Les repères et distances ne sont pas certifiés ; vérifiez les données d’origine.</td>
+</tr>
+<tr>
+  <td><strong>Positions dupliquées / espacement irrégulier</strong></td>
+  <td>Des coupes partagent un niveau ou les intervalles varient. Vérifiez l’acquisition avant d’utiliser les distances.</td>
+</tr>
+<tr>
+  <td><strong>Calibration HU absente</strong></td>
+  <td>Le lien entre intensité et HU n’est pas confirmé sur toutes les coupes. Ne traitez pas les préréglages comme une preuve de calibration.</td>
+</tr>
+<tr>
+  <td><strong>Nouvelle fenêtre sans effet</strong></td>
+  <td>Essayez Chrome ou Edge et vérifiez le blocage des popups du site local.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lumina n’effectue pas de reconstruction multiplanaire, de segmentation, de rendu 3D, de diagnostic automatique ou de connexion PACS. Les masques du notebook ne sont pas superposés dans cette version. La présence d’un effet de contraste ne signifie pas qu’un calcul de segmentation a été exécuté.</p>
+<h2 id="12-parcours-dapprentissage-conseille">12. Parcours d’apprentissage conseillé</h2>
+<ol>
+<li>Sélectionnez la série de démonstration et regardez sa vue d’ensemble pour comprendre la succession des niveaux.</li>
+<li>Ouvrez une coupe où les régions pulmonaires sont visibles. Lisez les repères R, L, A et P.</li>
+<li>Parcourez quelques coupes adjacentes pour observer la continuité des structures.</li>
+<li>Sur une seule coupe, comparez Poumon, Tissus mous et Os. Notez quelles zones gagnent ou perdent des détails visibles.</li>
+<li>Augmentez le zoom, déplacez l’image, puis rétablissez l’ajustement.</li>
+<li>Marquez une coupe en favori, retrouvez-la et exportez un PNG si vous avez besoin d’une illustration.</li>
+</ol>
+<p>Au terme de ce parcours, vous saurez naviguer dans une acquisition et expliquer les réglages d’affichage. Une conclusion sur la présence ou l’absence d’une maladie nécessite l’examen complet, son contexte clinique et une interprétation médicale.</p>
+<h2 id="sources-et-provenance">Sources et provenance</h2>
+<p>Les explications anatomiques et physiques sont appuyées par les liens placés dans les sections correspondantes : RadiologyInfo, le standard DICOM et le manuel universitaire <em>Medical Imaging Systems</em>. Sources consultées le 4 octobre 2026.</p>
+<p>Les captures montrent Lumina avec un fantôme informatique entièrement synthétique, produit par <code>tools/generate_demo.py</code>. La comparaison utilise ce même fantôme. Aucun DICOM réel, aucune coupe du notebook et aucune image de patient ne sont distribués. Les formes schématiques servent à expliquer le logiciel ; elles ne sont pas une anatomie de référence.</p>
+<p>Les procédures et les limites de ce guide ont été vérifiées dans le code de la version actuelle. Pour l’installation, consulter le fichier <code>README.md</code> ; pour l’étude du pipeline Python, consulter <code>ANALYSE_NOTEBOOK.md</code>.</p>
+</article><footer>Lumina · Guide utilisateur · 4 octobre 2026<br>Pour une version PDF, utilisez la commande Imprimer de votre navigateur, puis « Enregistrer au format PDF ».</footer></main></div></body></html>

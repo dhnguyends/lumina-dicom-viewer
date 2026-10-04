@@ -1,0 +1,17 @@
+# Local datasets and all generated patient files
+data/
+screenshots/
+*.dcm
+*.dicom
+*.npy
+*.npz
+*.ipynb
+.venv/
+__pycache__/
+*.pyc
+*.log
+test-results/
+.env
+.env.*
+.publication/
+publication/
